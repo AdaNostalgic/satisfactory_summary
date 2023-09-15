@@ -1,9 +1,14 @@
 <h1>Recipes</h1>
 
 <div *ngFor="let product of products">
-  <h3>{{ product.name }}</h3>
+  {{ product.outProductNb }} <b>{{ product.name }}</b> {{ '<< ' }}
+  {{ product.building }} {{ '<< ' }}
+  <ng-container *ngFor="let inProduct of product.inProducts">
+    {{ inProduct.nb }} {{ inProduct.name }};</ng-container
+  >
 </div>
 
+<h1>Summary</h1>
 <!-- 
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
