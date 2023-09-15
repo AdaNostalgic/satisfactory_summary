@@ -1,4 +1,4 @@
-export interface Product {
+export interface Recipe {
   name: string;
   building: string;
   outProductNb: number;
@@ -8,7 +8,7 @@ export interface Product {
   }[];
 }
 
-export const products = [
+export const recipes = [
   {
     name: 'ironOre',
     building: 'miner',
