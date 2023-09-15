@@ -1,50 +1,50 @@
+export type Ingredients = { [name: string]: number };
+
 export interface Recipe {
   name: string;
   building: string;
   outProductNb: number;
-  inProducts: {
-    name: string;
-    nb: number;
-  }[];
+  ingredients: Ingredients;
 }
 
-export const recipes = [
+export const recipes: Recipe[] = [
   {
     name: 'ironOre',
     building: 'miner',
     outProductNb: 60,
+    ingredients: {},
   },
   {
     name: 'ironLingot',
     building: 'smelter',
     outProductNb: 30,
-    inProducts: [{ name: 'ironOre', nb: 30 }],
+    ingredients: { ironOre: 30 },
   },
   {
     name: 'ironPlate',
     building: 'constructor',
     outProductNb: 20,
-    inProducts: [{ name: 'ironLingot', nb: 30 }],
+    ingredients: { ironLingot: 30 },
   },
   {
     name: 'ironRod',
     building: 'constructor',
     outProductNb: 20,
-    inProducts: [{ name: 'ironLingot', nb: 30 }],
+    ingredients: { ironLingot: 30 },
   },
   {
     name: 'screw',
     building: 'constructor',
     outProductNb: 40,
-    inProducts: [{ name: 'ironRod', nb: 10 }],
+    ingredients: { ironRod: 10 },
   },
   {
     name: 'reinforcedIronPlate',
     building: 'assembler',
     outProductNb: 5,
-    inProducts: [
-      { name: 'ironPlate', nb: 30 },
-      { name: 'screw', nb: 60 },
-    ],
+    ingredients: {
+      ironPlate: 30,
+      screw: 60,
+    },
   },
 ];

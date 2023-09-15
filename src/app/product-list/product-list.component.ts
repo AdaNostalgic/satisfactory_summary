@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { recipes } from '../data/recipes';
+import { recipes, Recipe, Ingredients } from '../data/recipes';
 
 @Component({
   selector: 'app-product-list',
@@ -8,43 +8,46 @@ import { recipes } from '../data/recipes';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
-  recipes = [...recipes];
+  recipes: Recipe[] = [...recipes];
 
-  products = this.getNeededProducts('reinforcedIronPlate', 20);
+  netProducts: Ingredients = { ironPlate: 20, reinforcedIronPlate: 2 };
+
+  products = this.fillWithNeededProducts({ ...this.netProducts });
 
   share() {
     window.alert('The product has been shared!');
   }
 
-  getNeededProducts(
-    productName: string,
-    nb: number
-  ): { [name: string]: number } {
+  getNeededProducts(productName: string, nb: number): Ingredients {
     const recipe = this.recipes.find((prd) => prd.name === productName);
     const neededProducts: { [name: string]: number } = {};
-    if (recipe && recipe.inProducts) {
-      recipe.inProducts.forEach((prd) => {
-        const neededNb = (prd.nb * nb) / recipe.outProductNb;
-        neededProducts[prd.name] = neededNb;
-        const recursiveNeeds = this.getNeededProducts(prd.name, neededNb);
-        for (let key in recursiveNeeds) {
-          let value = recursiveNeeds[key];
-          neededProducts[key] = neededProducts[key] ?? 0 + value;
-          // Use `key` and `value`
-        }
-      });
+    if (recipe) {
+      for (let ingredient in recipe.ingredients) {
+        const quantity: number = recipe.ingredients[ingredient];
+        neededProducts[ingredient] = (quantity * nb) / recipe.outProductNb;
+        this.fillWithNeededProducts(neededProducts);
+      }
     }
 
     return neededProducts;
   }
 
-  fillWithNeededProducts(products: { [name: string]: number }) {
+  fillWithNeededProducts(products: Ingredients): Ingredients {
     for (let outkey in products) {
       const inProducts = this.getNeededProducts(outkey, products[outkey]);
       for (let inKey in inProducts) {
-        products[inKey] = products[inKey] ?? 0 + inProducts[inKey];
+        products[inKey] = (products[inKey] ?? 0) + inProducts[inKey];
       }
     }
+    return products;
+  }
+
+  getBuilder(productName: string, nb: number): { name: string; nb: number } {
+    const recipe = this.recipes.find((prd) => prd.name === productName);
+    if (recipe) {
+      return { name: recipe.building, nb: nb / recipe.outProductNb };
+    }
+    return { name: '', nb: 0 };
   }
 }
 
