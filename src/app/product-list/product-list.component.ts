@@ -10,7 +10,13 @@ import { recipes, Recipe, Ingredients } from '../data/recipes';
 export class ProductListComponent {
   recipes: Recipe[] = [...recipes];
 
-  netProducts: Ingredients = { ironPlate: 20, reinforcedIronPlate: 2 };
+  netProducts: Ingredients = {
+    ironPlate: 10,
+    ironRod: 5,
+    screw: 10,
+    reinforcedIronPlate: 10,
+    rotor: 5,
+  };
 
   products = this.fillWithNeededProducts({ ...this.netProducts });
 
@@ -18,28 +24,55 @@ export class ProductListComponent {
     window.alert('The product has been shared!');
   }
 
-  getNeededProducts(productName: string, nb: number): Ingredients {
+  getIngredients(productName: string, nb: number): Ingredients {
     const recipe = this.recipes.find((prd) => prd.name === productName);
-    const neededProducts: { [name: string]: number } = {};
+    const ingredients: Ingredients = {};
     if (recipe) {
       for (let ingredient in recipe.ingredients) {
-        const quantity: number = recipe.ingredients[ingredient];
-        neededProducts[ingredient] = (quantity * nb) / recipe.outProductNb;
-        this.fillWithNeededProducts(neededProducts);
+        const quantity = this.getIngredientQuantity(
+          nb,
+          recipe.outProductNb,
+          recipe.ingredients[ingredient]
+        );
+
+        this.addIngredient(ingredients, ingredient, quantity);
+        this.mergeIngredients(
+          ingredients,
+          this.getIngredients(ingredient, quantity)
+        );
       }
     }
+    return ingredients;
+  }
 
-    return neededProducts;
+  getIngredientQuantity(
+    askQuantity: number,
+    recipeQuantity: number,
+    recipeIngredientQuantity: number
+  ): number {
+    return (recipeIngredientQuantity * askQuantity) / recipeQuantity;
+  }
+
+  addIngredient(existingIngredients: Ingredients, name: string, nb: number) {
+    existingIngredients[name] = (existingIngredients[name] ?? 0) + nb;
+  }
+
+  mergeIngredients(
+    existingIngredients: Ingredients,
+    newIngredients: Ingredients
+  ) {
+    for (let key in newIngredients) {
+      this.addIngredient(existingIngredients, key, newIngredients[key]);
+    }
   }
 
   fillWithNeededProducts(products: Ingredients): Ingredients {
+    const allIngredients = { ...products };
     for (let outkey in products) {
-      const inProducts = this.getNeededProducts(outkey, products[outkey]);
-      for (let inKey in inProducts) {
-        products[inKey] = (products[inKey] ?? 0) + inProducts[inKey];
-      }
+      const newIngredients = this.getIngredients(outkey, products[outkey]);
+      this.mergeIngredients(allIngredients, newIngredients);
     }
-    return products;
+    return allIngredients;
   }
 
   getBuilder(productName: string, nb: number): { name: string; nb: number } {

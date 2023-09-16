@@ -9,6 +9,36 @@ export interface Recipe {
 
 export const recipes: Recipe[] = [
   {
+    name: 'coperOre',
+    building: 'miner',
+    outProductNb: 60,
+    ingredients: {},
+  },
+  {
+    name: 'coperLingot',
+    building: 'smelter',
+    outProductNb: 30,
+    ingredients: { coperOre: 30 },
+  },
+  {
+    name: 'coperSheet',
+    building: 'constructor',
+    outProductNb: 10,
+    ingredients: { coperLingot: 20 },
+  },
+  {
+    name: 'wire',
+    building: 'constructor',
+    outProductNb: 30,
+    ingredients: { coperLingot: 15 },
+  },
+  {
+    name: 'cable',
+    building: 'constructor',
+    outProductNb: 60,
+    ingredients: { wire: 30 },
+  },
+  {
     name: 'ironOre',
     building: 'miner',
     outProductNb: 60,
@@ -45,6 +75,15 @@ export const recipes: Recipe[] = [
     ingredients: {
       ironPlate: 30,
       screw: 60,
+    },
+  },
+  {
+    name: 'rotor',
+    building: 'assembler',
+    outProductNb: 4,
+    ingredients: {
+      ironRod: 20,
+      screw: 100,
     },
   },
 ];
