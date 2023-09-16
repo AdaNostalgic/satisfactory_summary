@@ -1,0 +1,19 @@
+img {
+  max-width: 60px;
+  height: auto;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+  max-width: 60px;
+}
+
+.over {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  color: white;
+  text-shadow: 2px 2px 3px black;
+}

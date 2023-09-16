@@ -1,5 +1,9 @@
 <h1>Recipes</h1>
 <div *ngFor="let recipe of recipes">
+  <app-ingredient
+    [name]="recipe.name"
+    [quantity]="recipe.outProductNb"
+  ></app-ingredient>
   {{ recipe.outProductNb }} <b>{{ recipe.name }}</b> {{ '<< ' }}
   {{ recipe.building }} {{ '<< ' }}
   <ng-container *ngFor="let inProduct of recipe.ingredients | keyvalue">

@@ -9,19 +9,19 @@ export interface Recipe {
 
 export const recipes: Recipe[] = [
   {
-    name: 'coperOre',
+    name: 'copperOre',
     building: 'miner',
     outProductNb: 60,
     ingredients: {},
   },
   {
-    name: 'coperLingot',
+    name: 'copperLingot',
     building: 'smelter',
     outProductNb: 30,
     ingredients: { coperOre: 30 },
   },
   {
-    name: 'coperSheet',
+    name: 'copperSheet',
     building: 'constructor',
     outProductNb: 10,
     ingredients: { coperLingot: 20 },
