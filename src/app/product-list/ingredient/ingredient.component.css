@@ -1,13 +1,18 @@
-img {
-  max-width: 60px;
+.fit-picture {
+  max-width: 50px;
   height: auto;
 }
 
+.quantity {
+  padding-left: -50px;
+  text-shadow: 1px 1px 2px white;
+}
+/*
 .container {
   position: relative;
   text-align: center;
   color: white;
-  max-width: 60px;
+  max-width: 40px;
 }
 
 .over {
@@ -16,4 +21,4 @@ img {
   top: 20px;
   color: white;
   text-shadow: 2px 2px 3px black;
-}
+} */
