@@ -8,8 +8,11 @@
   {{ '<< ' }}
   {{ recipe.building }} {{ '<< ' }}
   <ng-container *ngFor="let inProduct of recipe.ingredients | keyvalue">
-    {{ inProduct.value }} {{ inProduct.key }};</ng-container
-  >
+    <app-ingredient
+      [name]="inProduct.key"
+      [quantity]="inProduct.value"
+    ></app-ingredient>
+  </ng-container>
 </div>
 
 <h1>Summary</h1>

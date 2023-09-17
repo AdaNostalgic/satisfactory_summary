@@ -15,22 +15,22 @@ export const recipes: Recipe[] = [
     ingredients: {},
   },
   {
-    name: 'copperLingot',
+    name: 'copperIngot',
     building: 'smelter',
     outProductNb: 30,
-    ingredients: { coperOre: 30 },
+    ingredients: { copperOre: 30 },
   },
   {
     name: 'copperSheet',
     building: 'constructor',
     outProductNb: 10,
-    ingredients: { coperLingot: 20 },
+    ingredients: { copperIngot: 20 },
   },
   {
     name: 'wire',
     building: 'constructor',
     outProductNb: 30,
-    ingredients: { coperLingot: 15 },
+    ingredients: { copperIngot: 15 },
   },
   {
     name: 'cable',
@@ -45,7 +45,7 @@ export const recipes: Recipe[] = [
     ingredients: {},
   },
   {
-    name: 'ironLingot',
+    name: 'ironIngot',
     building: 'smelter',
     outProductNb: 30,
     ingredients: { ironOre: 30 },
@@ -54,13 +54,13 @@ export const recipes: Recipe[] = [
     name: 'ironPlate',
     building: 'constructor',
     outProductNb: 20,
-    ingredients: { ironLingot: 30 },
+    ingredients: { ironIngot: 30 },
   },
   {
     name: 'ironRod',
     building: 'constructor',
     outProductNb: 20,
-    ingredients: { ironLingot: 30 },
+    ingredients: { ironIngot: 30 },
   },
   {
     name: 'screw',
