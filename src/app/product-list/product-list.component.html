@@ -4,7 +4,8 @@
     [name]="recipe.name"
     [quantity]="recipe.outProductNb"
   ></app-ingredient>
-  {{ recipe.outProductNb }} <b>{{ recipe.name }}</b> {{ '<< ' }}
+  <!-- {{ recipe.outProductNb }} <b>{{ recipe.name }}</b> -->
+  {{ '<< ' }}
   {{ recipe.building }} {{ '<< ' }}
   <ng-container *ngFor="let inProduct of recipe.ingredients | keyvalue">
     {{ inProduct.value }} {{ inProduct.key }};</ng-container
