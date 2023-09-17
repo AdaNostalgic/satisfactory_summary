@@ -18,13 +18,18 @@
 <h1>Summary</h1>
 <h2>
   <ng-container *ngFor="let netProduct of netProducts | keyvalue">
-    {{ netProduct.value }} {{ netProduct.key }};</ng-container
-  >
+    <app-ingredient
+      [name]="netProduct.key"
+      [quantity]="netProduct.value"
+    ></app-ingredient>
+  </ng-container>
 </h2>
 <div *ngFor="let product of products | keyvalue">
-  {{ product.value }} {{ product.key }} ({{
-    getBuilder(product.key, product.value).nb
-  }}
+  <app-ingredient
+    [name]="product.key"
+    [quantity]="product.value"
+  ></app-ingredient>
+  ({{ getBuilder(product.key, product.value).nb }}
   {{ getBuilder(product.key, product.value).name }})
 </div>
 
