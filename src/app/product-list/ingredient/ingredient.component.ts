@@ -1,20 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
+import { recipes } from '../../data/recipes';
 
 @Component({
   selector: 'app-ingredient',
   templateUrl: './ingredient.component.html',
   styleUrls: ['./ingredient.component.css'],
 })
-export class IngredientComponent {
+export class IngredientComponent implements OnChanges{
   @Input()
   name!: string;
 
   @Input()
   quantity!: number;
+
+  label : string = '';
+
+  ngOnChanges () {
+    this.label = recipes.find(r => r.name === this.name)?.label ?? this.name;
+  }
+
 }
 
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/
+

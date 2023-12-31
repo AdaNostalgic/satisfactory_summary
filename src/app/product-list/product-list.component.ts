@@ -14,8 +14,9 @@ export class ProductListComponent {
     ironPlate: 10,
     ironRod: 5,
     screw: 10,
-    reinforcedIronPlate: 10,
+    reinforcedIronPlate: 5,
     rotor: 5,
+    superComputer: 1,
   };
 
   products = this.fillWithNeededProducts({ ...this.netProducts });
@@ -84,8 +85,4 @@ export class ProductListComponent {
   }
 }
 
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/
+
